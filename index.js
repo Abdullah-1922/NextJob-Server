@@ -96,6 +96,29 @@ app.put('/updatejob/:id',async(req,res)=>{
     return {message:err.message ,err:true}
   }
 })
+// app.get('/alljob',async(req,res)=>{
+// const filter= {category:req.query.category };
+
+// console.log(filter);
+
+//   const result =await jobCollection.find(filter).toArray();
+//   console.log(result);
+//   res.send(result);
+
+// })
+app.get('/alljob', async(req,res)=>{
+
+  const query = {category: req.query.category}
+   
+  try{
+    const result =await jobCollection.find(query).toArray();
+  await  console.log(result);
+    res.send(result);
+  }catch(err){
+    return {message:err.message ,err:true}
+  }
+  
+})
  app.get('/',(req,res)=>{
     res.send('server is running')
  })
