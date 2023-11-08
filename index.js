@@ -130,9 +130,31 @@ app.post('/bidjobs',async(req,res)=>{
     return { message: err.message, err: true
       }
   }
-  
-  
 })
+
+app.get('/bidjobs',async(req,res)=>{
+  const query = { bidEmail: req.query.email }
+  try{
+   const result =await bidCollection.find(query).toArray()
+   res.send(result);
+  }catch(err){
+    return { message: err.message, err: true
+      }
+  }
+
+})
+app.get('/bidjobsown',async(req,res)=>{
+  const query = { email: req.query.email }
+  try{
+   const result =await bidCollection.find(query).toArray()
+   res.send(result);
+  }catch(err){
+    return { message: err.message, err: true
+      }
+  }
+
+})
+
 app.get('/', (req, res) => {
   res.send('server is running')
 })
