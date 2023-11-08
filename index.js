@@ -154,6 +154,24 @@ app.get('/bidjobsown',async(req,res)=>{
   }
 
 })
+app.patch('/status/:id',async(req,res)=>{
+  const id = req.params.id;
+  try{
+    const filter = { _id: new ObjectId(id) }
+  const updatedStatus = req.body;
+  console.log(updatedStatus);
+  const updateDoc = {
+    $set: {
+        status: updatedStatus.status
+    },
+};
+const result = await bidCollection.updateOne(filter, updateDoc);
+res.send(result);
+  }catch(err){
+    return { message: err.message, err: true
+      }
+  }
+})
 
 app.get('/', (req, res) => {
   res.send('server is running')
